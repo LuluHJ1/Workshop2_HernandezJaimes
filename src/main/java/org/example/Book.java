@@ -58,7 +58,7 @@ public class Book {
     }
 
     public void checkOut(String name) {
-        if (isCheckedOut) {
+        if (!isCheckedOut) {
             isCheckedOut = true;
             checkedOutTo = name;
 
@@ -70,6 +70,7 @@ public class Book {
             isCheckedOut = false;
             checkedOutTo = "";
         }
+
 
 
     }

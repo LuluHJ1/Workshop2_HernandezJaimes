@@ -7,9 +7,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-
         Scanner scanner = new Scanner(System.in);
-        Book[] book = new Book[]{
+        Book[] books = new Book[]{
                 new Book(1, "978-1-84356-091-2", "The Silent Horizon", false, ""),
                 new Book(2, "978-0-45219-876-3", "Echoes of Tomorrow", false, ""),
                 new Book(3, "978-1-56619-332-7", "Crimson Skies", false, ""),
@@ -39,14 +38,70 @@ public class Main {
             System.out.print("Enter your choice: ");
 
             int userInput = scanner.nextInt();
+            scanner.nextLine();
+
+            //OPTION 1
+            if (userInput == 1) {
+                System.out.println("Available books: ");
+
+                for (Book book : books) {
+                    if (!book.isCheckedOut()) {
+                        System.out.println("ID: " + book.getId() + " " + "ISBN: "  + book.getIsbn() + " " + "Title: "  + book.getTitle());
+                    }
+                }
+                System.out.println("Enter book ID to check out");
+
+                int id = scanner.nextInt();
+                scanner.nextLine();
 
 
+                System.out.println("Enter your name: ");
+                String name = scanner.nextLine();
 
-            if (userInput == 1){
+                for (Book book : books) {
+                    if (book.getId() == id) {
+                        book.checkOut(name);
+                        System.out.println("Book has been checked out successfully! ");
+                        break;
 
+                    }
+                }
+            }
 
+            //OPTION 2
+            else if (userInput == 2) {
+
+                System.out.println("Checked Out Books: ");
+
+                for (Book book : books) {
+                    if (book.isCheckedOut()) {
+                        System.out.println("ID: " + book.getId() + " " + "ISBN: " + book.getIsbn() + " " + "Title: " + book.getTitle() + " " + "Checked out by: " + book.getCheckedOutTo());
+                    }
+                }
+                System.out.println("(C) to check in, (X) to EXIT)");
+                String option = scanner.nextLine();
+
+                if (option.equalsIgnoreCase("C")) {
+
+                    System.out.println("Enter book ID you want to check in: ");
+                    int id = scanner.nextInt();
+                    scanner.nextLine();
+
+                    for (Book book : books) {
+                        if (book.getId() == id) {
+                            book.checkIn();
+                            System.out.println("Book checked in.");
+                            break;
+
+                        }
+                    }
+                } else if (option.equalsIgnoreCase("X")) {
+                    System.out.println("Returning to home.");
+                }
+            } else if (userInput == 3) {
+                System.out.println("Exiting.");
+                System.exit(0);
             }
         }
     }
-
 }
