@@ -7,6 +7,7 @@ public class Book {
     private String title;
     private boolean isCheckedOut;
     private String checkedOutTo;
+
     public Book(int id, String isbn, String title, boolean isCheckedOut, String checkedOutTo) {
 
         this.id = id;
@@ -15,6 +16,7 @@ public class Book {
         this.isCheckedOut = isCheckedOut;
         this.checkedOutTo = checkedOutTo;
     }
+
     public int getId() {
         return id;
     }
@@ -55,8 +57,23 @@ public class Book {
         this.checkedOutTo = checkedOutTo;
     }
 
+    public void checkOut(String name) {
+        if (isCheckedOut) {
+            isCheckedOut = true;
+            checkedOutTo = name;
+
+        } else {
+            System.out.println("Book is already checked out");
+        }
+    }
+        public void checkIn () {
+            isCheckedOut = false;
+            checkedOutTo = "";
+        }
+
 
     }
+
 
 
 
